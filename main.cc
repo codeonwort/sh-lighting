@@ -209,12 +209,12 @@ int main()
 			SHSample& sam = shSamples[i];
 			printf("sph = (%lf, %lf, %lf)\n", sam.sph.x, sam.sph.y, sam.sph.z);
 			printf("vec = (%lf, %lf, %lf)\n", sam.vec.x, sam.vec.y, sam.vec.z);
-			printf("coeff = ");
+			printf("coeff = (");
 			for (int j = 0; j < sam.coeff.size(); ++j)
 			{
 				printf("%lf ", sam.coeff[j]);
 			}
-			printf("\n");
+			printf(")\n");
 		}
 #endif
 	}
@@ -226,11 +226,12 @@ int main()
 		printf("# of coeff = %d\n", (int)myCoeff.size());
 #if VERBOSE
 		puts("=== DEBUG: Projected function ===");
+		printf("myCoeff = (");
 		for (int i = 0; i < myCoeff.size(); ++i)
 		{
 			printf("%lf ", myCoeff[i]);
 		}
-		puts("");
+		puts(")");
 #endif
 	}
 
@@ -242,8 +243,8 @@ int main()
 		double avgErr = 0.0;
 		for (int i = 0; i < nTest; ++i)
 		{
-			double theta = rnd();
-			double phi = rnd();
+			double theta = 2.0 * M_PI * rnd();
+			double phi = 2.0 * M_PI * rnd();
 			double x1 = testLight(theta, phi);
 			double x2 = testLightSH(theta, phi, myCoeff, nBands);
 
